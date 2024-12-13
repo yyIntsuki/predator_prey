@@ -1,0 +1,21 @@
+experiment Simulation model:'Main.gaml' type:gui {
+	parameter "Initial number of preys: " var: nb_preys_init min: 0 max: 1000 category: "Prey";
+	parameter "Prey max energy: " var: prey_max_energy category: "Prey";
+	parameter "Prey max transfer: " var: prey_max_transfer category: "Prey";
+	parameter "Prey energy consumption: " var: prey_energy_consum category: "Prey";
+	parameter "Initial number of predators: " var: nb_predators_init min: 0 max: 200 category: "Predator";
+	parameter "Predator max energy: " var: predator_max_energy category: "Predator";
+	parameter "Predator energy transfer: " var: predator_energy_transfer category: "Predator";
+	parameter "Predator energy consumption: " var: predator_energy_consum category: "Predator";
+	
+	output {
+		display main_display {
+			grid vegetation_cell border: #black;
+			species prey aspect: base;
+			species predator aspect: base;
+		}
+
+		monitor "Number of preys" value: nb_preys;
+		monitor "Number of predators" value: nb_predators;
+	}
+}
