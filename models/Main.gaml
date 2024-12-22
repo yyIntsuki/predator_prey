@@ -8,7 +8,7 @@ import "Simulation.experiment"
 
 global {
 	int nb_preys_init <- 200;
-	int nb_predators_init <- 50;
+	int nb_predators_init <- 20;
 	int nb_preys -> {length(prey)};
 	int nb_predators -> {length(predator)};
 	
