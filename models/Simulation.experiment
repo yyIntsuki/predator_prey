@@ -14,7 +14,7 @@ experiment Simulation model:'Main.gaml' type:gui {
 			species prey aspect: base;
 			species predator aspect: base;
 		}
-
+		
 		monitor "Number of preys" value: nb_preys;
 		monitor "Number of predators" value: nb_predators;
 	}
