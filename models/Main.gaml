@@ -9,8 +9,8 @@ import "Simulation.experiment"
 global {
 	int nb_preys_init <- 200;
 	int nb_predators_init <- 20;
-	int nb_preys -> {length(prey)};
-	int nb_predators -> {length(predator)};
+	int nb_preys -> { length(prey) };
+	int nb_predators -> { length(predator) };
 	
 	float prey_max_energy <- 1.0;
 	float prey_max_transfer <- 0.1;

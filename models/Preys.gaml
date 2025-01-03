@@ -12,6 +12,11 @@ species prey parent: generic_species {
 		energy <- rnd(max_energy);
 	}
 	
+	/* Chooses the richest vegetation node nearby */
+	vegetation_cell choose_cell {
+        return (my_cell.neighbors2) with_max_of (each.food);
+    }
+	
 	float energy_from_eat {
 		energy_transfer <- 0.0;
 		if (my_cell.food > 0) {

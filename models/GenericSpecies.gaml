@@ -16,23 +16,36 @@ species generic_species {
 	float energy_consum;
 	float energy <- rnd(max_energy) update: energy - energy_consum max: max_energy;
 	
-	/* Location */
-	vegetation_cell my_cell <- one_of (vegetation_cell);
+	/* Disease */
+	bool infected <- false;
+	bool recovered <- false;
+	int infection_duration <- 0;
+	int max_infection_duration <- 20;
+	
+	/* Location and Surroundings */
+	vegetation_cell my_cell;
+	list<generic_species> my_neighbors;
+	
+	/* Initialization */
+	init {
+		my_cell <- one_of(vegetation_cell);
+		location <- my_cell.location;
+	}
 	
 	/* Events */
 	reflex basic_move {
-		my_cell <- one_of(my_cell.neighbors2);
+		my_cell <- choose_cell();
 		location <- my_cell.location;
+	}
+	
+	vegetation_cell choose_cell {
+		return nil;
 	}
 	
 	float energy_from_eat { return 0.0; }
 	
 	reflex eat { energy <- energy + energy_from_eat(); }
 	
-	reflex die when: energy <= 0 {
-		do die;
-	}
+	reflex die when: energy <= 0 { do die; }
 	
-	/* Initialization */
-	init { location <- my_cell.location; }
 }
