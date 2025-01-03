@@ -4,6 +4,7 @@ import "Main.gaml"
 
 /* Defines the world grid using vegetations */
 grid vegetation_cell width: 50 height: 50 neighbors: 4 {
+	
     float max_food <- (rnd(1.0) < 0.1 ? 3.0 : 1.0); 				// Randomize for "Rich Food nodes"
     float food_prod <- rnd(0.01);
     float food <- rnd(1.0) max: max_food update: food + food_prod;
@@ -16,4 +17,5 @@ grid vegetation_cell width: 50 height: 50 neighbors: 4 {
         : rgb(int(255 * (1 - food / max_food)), 255, int(255 * (1 - food / max_food))));
     
     list<vegetation_cell> neighbors2 <- (self neighbors_at 2);
+    
 }

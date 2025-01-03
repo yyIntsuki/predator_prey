@@ -4,6 +4,7 @@ import "Main.gaml"
 import "GenericSpecies.gaml"
 
 species prey parent: generic_species {
+	
 	init {
 		color <- #blue;
 		max_energy <- prey_max_energy;
@@ -17,6 +18,7 @@ species prey parent: generic_species {
         return (my_cell.neighbors2) with_max_of (each.food);
     }
 	
+	/* Consumes vegetation inside current node */
 	float energy_from_eat {
 		energy_transfer <- 0.0;
 		if (my_cell.food > 0) {

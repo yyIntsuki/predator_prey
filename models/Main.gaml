@@ -7,6 +7,7 @@ import "Predators.gaml"
 import "Simulation.experiment"
 
 global {
+	
 	int nb_preys_init <- 200;
 	int nb_predators_init <- 20;
 	int nb_preys -> { length(prey) };
@@ -24,4 +25,5 @@ global {
 		create prey number: nb_preys_init;
 		create predator number: nb_predators_init;
 	}
+	
 }

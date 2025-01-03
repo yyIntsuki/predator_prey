@@ -4,6 +4,7 @@ import "Main.gaml"
 import "Grid.gaml"
 
 species generic_species {
+	
 	/* Visual */
 	float size <- 1.0;
 	rgb color;
@@ -16,15 +17,8 @@ species generic_species {
 	float energy_consum;
 	float energy <- rnd(max_energy) update: energy - energy_consum max: max_energy;
 	
-	/* Disease */
-	bool infected <- false;
-	bool recovered <- false;
-	int infection_duration <- 0;
-	int max_infection_duration <- 20;
-	
-	/* Location and Surroundings */
+	/* Location */
 	vegetation_cell my_cell;
-	list<generic_species> my_neighbors;
 	
 	/* Initialization */
 	init {
@@ -32,7 +26,7 @@ species generic_species {
 		location <- my_cell.location;
 	}
 	
-	/* Events */
+	/* Movement */
 	reflex basic_move {
 		my_cell <- choose_cell();
 		location <- my_cell.location;
@@ -42,9 +36,10 @@ species generic_species {
 		return nil;
 	}
 	
-	float energy_from_eat { return 0.0; }
-	
+	/* Survival related behaiors */
 	reflex eat { energy <- energy + energy_from_eat(); }
+	
+	float energy_from_eat { return 0.0; }
 	
 	reflex die when: energy <= 0 { do die; }
 	
