@@ -24,10 +24,15 @@ species predator parent: generic_species {
 	float energy_from_eat {
 		list<prey> reachable_preys <- prey inside(my_cell);
 		if (!empty(reachable_preys)) {
+			if(one_of(reachable_preys).is_infected){ is_infected <- true; }
 			ask one_of(reachable_preys) { do die; }
 			return energy_transfer;
 		}
 		return 0.0;
+	}
+	
+	reflex infected when: is_infected {
+		color <- #darkred;
 	}
 	
 }

@@ -17,6 +17,9 @@ species generic_species {
 	float energy_consum;
 	float energy <- rnd(max_energy) update: energy - energy_consum max: max_energy;
 	
+	/* Disease */
+	bool is_infected;
+	
 	/* Location */
 	vegetation_cell my_cell;
 	

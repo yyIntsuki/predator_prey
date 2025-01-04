@@ -11,6 +11,7 @@ species prey parent: generic_species {
 		max_transfer <- prey_max_transfer;
 		energy_consum <- prey_energy_consum;
 		energy <- rnd(max_energy);
+		is_infected <- flip(0.1);
 	}
 	
 	/* Chooses the richest vegetation node nearby */
@@ -27,4 +28,9 @@ species prey parent: generic_species {
 		}
 		return energy_transfer;
 	}
+	
+	reflex infected when: is_infected {
+		color <- #darkblue;
+	}
+	
 }
