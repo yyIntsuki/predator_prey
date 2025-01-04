@@ -15,17 +15,19 @@ species predator parent: generic_species {
 	
 	/* Chooses neighboring preys if found, otherwise random */
     vegetation_cell choose_cell {
-        vegetation_cell my_cell_tmp <- shuffle(my_cell.neighbors2) first_with (!(empty (prey inside (each))));
+        vegetation_cell my_cell_tmp <- shuffle (my_cell.neighbors2) first_with (!(empty(prey inside (each))));
 		if my_cell_tmp != nil { return my_cell_tmp; }
 		else { return one_of (my_cell.neighbors2); }
     }
 	
-	/* Consumes a prey inside current node */
+	/* Consumes a prey inside current node
+	 * Predator is infected if prey consumed was infected
+	 */
 	float energy_from_eat {
-		list<prey> reachable_preys <- prey inside(my_cell);
-		if (!empty(reachable_preys)) {
-			if(one_of(reachable_preys).is_infected){ is_infected <- true; }
-			ask one_of(reachable_preys) { do die; }
+		list<prey> reachable_preys <- prey inside (my_cell);
+		if !empty(reachable_preys) {
+			if one_of (reachable_preys).is_infected { is_infected <- true; }
+			ask one_of (reachable_preys) { do die; }
 			return energy_transfer;
 		}
 		return 0.0;

@@ -22,7 +22,7 @@ species prey parent: generic_species {
 	/* Consumes vegetation inside current node */
 	float energy_from_eat {
 		energy_transfer <- 0.0;
-		if (my_cell.food > 0) {
+		if my_cell.food > 0 {
 			energy_transfer <- min([max_transfer, my_cell.food]);
 			my_cell.food <- my_cell.food - energy_transfer;
 		}

@@ -1,4 +1,4 @@
-experiment Simulation model:'Main.gaml' type:gui {
+experiment Simulation model: 'Main.gaml' type: gui {
 	
 	parameter "Initial number of preys: " var: nb_preys_init min: 0 max: 1000 category: "Prey";
 	parameter "Initial number of predators: " var: nb_predators_init min: 0 max: 200 category: "Predator";

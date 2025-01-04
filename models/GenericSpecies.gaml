@@ -25,7 +25,7 @@ species generic_species {
 	
 	/* Initialization */
 	init {
-		my_cell <- one_of(vegetation_cell);
+		my_cell <- one_of (vegetation_cell);
 		location <- my_cell.location;
 	}
 	
