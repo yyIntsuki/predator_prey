@@ -11,6 +11,8 @@ experiment Simulation model:'Main.gaml' type:gui {
 	parameter "Predator energy transfer: " var: predator_energy_transfer category: "Predator";
 	parameter "Predator energy consumption: " var: predator_energy_consum category: "Predator";
 	
+	parameter "Infection Probability: " var: infection_probability category: "Disease Spread";
+	
 	output {
 		display main_display {
 			grid vegetation_cell border: #black;
@@ -20,6 +22,8 @@ experiment Simulation model:'Main.gaml' type:gui {
 		
 		monitor "Number of preys" value: nb_preys;
 		monitor "Number of predators" value: nb_predators;
+		monitor "Number of infected preys" value: nb_infected_preys;
+		monitor "Number of infected predators" value: nb_infected_predators;
 	}
 	
 }

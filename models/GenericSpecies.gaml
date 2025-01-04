@@ -35,9 +35,7 @@ species generic_species {
 		location <- my_cell.location;
 	}
 	
-	vegetation_cell choose_cell {
-		return nil;
-	}
+	vegetation_cell choose_cell { return nil; }
 	
 	/* Survival related behaiors */
 	reflex eat { energy <- energy + energy_from_eat(); }

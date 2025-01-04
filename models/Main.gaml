@@ -20,6 +20,10 @@ global {
 	float predator_max_energy <- 1.0;
 	float predator_energy_transfer <- 0.5;
 	float predator_energy_consum <- 0.02;
+	
+	float infection_probability <- 0.1;
+	int nb_infected_preys -> { length(prey where (each.is_infected)) };
+	int nb_infected_predators -> { length(predator where (each.is_infected)) };
 
 	init {
 		create prey number: nb_preys_init;

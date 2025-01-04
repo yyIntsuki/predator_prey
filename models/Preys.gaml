@@ -11,7 +11,7 @@ species prey parent: generic_species {
 		max_transfer <- prey_max_transfer;
 		energy_consum <- prey_energy_consum;
 		energy <- rnd(max_energy);
-		is_infected <- flip(0.1);
+		is_infected <- flip(infection_probability);
 	}
 	
 	/* Chooses the richest vegetation node nearby */
