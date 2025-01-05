@@ -15,7 +15,15 @@ species generic_species {
 	float max_transfer;
 	float energy_transfer;
 	float energy_consum;
-	float energy <- rnd(max_energy) update: energy - energy_consum max: max_energy;
+	float energy <- rnd(max_energy) update: energy_update_rule() max: max_energy;
+	
+	float energy_update_rule {
+		if (is_infected) {
+			return energy - energy_consum + 0.02; 
+		} else {
+			return energy - energy_consum; 
+		}
+	}
 	
 	/* Reproduction */
     float proba_reproduce;
@@ -23,7 +31,20 @@ species generic_species {
     float energy_reproduce;
 	
 	/* Disease */
-	bool is_infected;
+	bool is_infected <- false update: infection_update_rule();
+	
+	bool infection_update_rule {
+		if(is_infected){
+			return flip(1 - cured_proba);
+		}
+		list<generic_species> nearby_species <- generic_species inside(my_cell);
+		if !empty(nearby_species) {
+			if one_of (nearby_species).is_infected {
+				return flip(infection_spread_probability);
+			}
+		}
+		return false;
+	}
 	
 	/* Location */
 	vegetation_cell my_cell;

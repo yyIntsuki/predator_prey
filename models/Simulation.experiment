@@ -18,7 +18,9 @@ experiment Simulation model: 'Main.gaml' type: gui {
 	parameter "Predator nb max offsprings: " var: predator_nb_max_offsprings category: "Predator" ;
 	parameter "Predator energy reproduce: " var: predator_energy_reproduce category: "Predator" ;
 	
-	parameter "Infection Probability: " var: infection_probability category: "Disease Spread";
+	parameter "Infection Probability: " var: infection_probability min: 0.0 max: 1.0 category: "Disease Spread";
+	parameter "Infection Spread Probability: " var: infection_spread_probability min: 0.0 max: 1.0 category: "Disease Spread";
+	parameter "Cured Probability: " var: cured_proba min: 0.0 max: 1.0 category: "Disease Spread";
 	
 	output {
 		display main_display {

@@ -27,7 +27,10 @@ species predator parent: generic_species {
 	 * Predator is infected if prey consumed was infected
 	 */
 	float energy_from_eat {
-		list<prey> reachable_preys <- prey inside (my_cell);
+		if (energy > max_energy*0.7){
+			return 0.0;
+		}	
+		list<prey> reachable_preys <- prey inside(my_cell);
 		if !empty(reachable_preys) {
 			if one_of (reachable_preys).is_infected { is_infected <- true; }
 			ask one_of (reachable_preys) { do die; }
