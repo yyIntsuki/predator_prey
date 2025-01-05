@@ -11,6 +11,9 @@ species predator parent: generic_species {
 		energy_transfer <- predator_energy_transfer;
 		energy_consum <- predator_energy_consum;
 		energy <- rnd(max_energy);
+		proba_reproduce <- predator_proba_reproduce;
+      	nb_max_offsprings <- predator_nb_max_offsprings;
+      	energy_reproduce <- predator_energy_reproduce;
 	}
 	
 	/* Chooses neighboring preys if found, otherwise random */

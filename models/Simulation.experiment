@@ -11,6 +11,13 @@ experiment Simulation model: 'Main.gaml' type: gui {
 	parameter "Predator energy transfer: " var: predator_energy_transfer category: "Predator";
 	parameter "Predator energy consumption: " var: predator_energy_consum category: "Predator";
 	
+	parameter "Prey probability reproduce: " var: prey_proba_reproduce category: "Prey" ;
+	parameter "Prey nb max offsprings: " var: prey_nb_max_offsprings category: "Prey" ;
+	parameter "Prey energy reproduce: " var: prey_energy_reproduce category: "Prey" ;
+	parameter "Predator probability reproduce: " var: predator_proba_reproduce category: "Predator" ;
+	parameter "Predator nb max offsprings: " var: predator_nb_max_offsprings category: "Predator" ;
+	parameter "Predator energy reproduce: " var: predator_energy_reproduce category: "Predator" ;
+	
 	parameter "Infection Probability: " var: infection_probability category: "Disease Spread";
 	
 	output {
