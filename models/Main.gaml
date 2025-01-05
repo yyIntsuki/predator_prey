@@ -8,6 +8,8 @@ import "Simulation.experiment"
 
 global {
 	
+	bool is_batch <- true;
+	
 	int nb_preys_init <- 200;
 	int nb_predators_init <- 20;
 	int nb_preys -> { length(prey) };
@@ -40,8 +42,6 @@ global {
 		create predator number: nb_predators_init;
 	}
 	
-	reflex stop_simulation when: (nb_preys = 0) or (nb_predators = 0) {
-		do pause;
-	} 
+	reflex stop_simulation when: ((nb_preys = 0) or (nb_predators = 0)) and not is_batch { do pause; } 
 	
 }
