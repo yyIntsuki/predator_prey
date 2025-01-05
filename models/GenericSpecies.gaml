@@ -17,6 +17,11 @@ species generic_species {
 	float energy_consum;
 	float energy <- rnd(max_energy) update: energy - energy_consum max: max_energy;
 	
+	/* Reproduction */
+    float proba_reproduce;
+    int nb_max_offsprings;
+    float energy_reproduce;
+	
 	/* Disease */
 	bool is_infected;
 	
@@ -41,6 +46,16 @@ species generic_species {
 	reflex eat { energy <- energy + energy_from_eat(); }
 	
 	float energy_from_eat { return 0.0; }
+	
+	reflex reproduce when: (energy >= energy_reproduce) and (flip(proba_reproduce)) {
+        int nb_offsprings <- rnd(1, nb_max_offsprings);
+        create species(self) number: nb_offsprings {
+            my_cell <- myself.my_cell ;
+            location <- my_cell.location ;
+            energy <- myself.energy / nb_offsprings ;
+        }
+        energy <- energy / nb_offsprings ;
+    }
 	
 	reflex die when: energy <= 0 { do die; }
 	
