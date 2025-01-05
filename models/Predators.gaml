@@ -12,15 +12,16 @@ species predator parent: generic_species {
 		energy_consum <- predator_energy_consum;
 		energy <- rnd(max_energy);
 		proba_reproduce <- predator_proba_reproduce;
-      	nb_max_offsprings <- predator_nb_max_offsprings;
-      	energy_reproduce <- predator_energy_reproduce;
+		nb_max_offsprings <- predator_nb_max_offsprings;
+		energy_reproduce <- predator_energy_reproduce;
 	}
 	
-	/* Chooses neighboring preys if found, otherwise random */
+	/* Chooses random neiboring nodes */
     vegetation_cell choose_cell {
-        vegetation_cell my_cell_tmp <- shuffle (my_cell.neighbors2) first_with (!(empty(prey inside (each))));
-		if my_cell_tmp != nil { return my_cell_tmp; }
-		else { return one_of (my_cell.neighbors2); }
+    	return one_of (my_cell.neighbors2);
+		// vegetation_cell my_cell_tmp <- shuffle (my_cell.neighbors2) first_with (!(empty(prey inside (each))));
+		// if my_cell_tmp != nil { return my_cell_tmp; }
+		// else { return one_of (my_cell.neighbors2); }
     }
 	
 	/* Consumes a prey inside current node

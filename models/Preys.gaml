@@ -11,16 +11,17 @@ species prey parent: generic_species {
 		max_transfer <- prey_max_transfer;
 		energy_consum <- prey_energy_consum;
 		energy <- rnd(max_energy);
-	    proba_reproduce <- prey_proba_reproduce;
-	    nb_max_offsprings <- prey_nb_max_offsprings;
-	    energy_reproduce <- prey_energy_reproduce;
+		proba_reproduce <- prey_proba_reproduce;
+		nb_max_offsprings <- prey_nb_max_offsprings;
+		energy_reproduce <- prey_energy_reproduce;
 		is_infected <- flip(infection_probability);
 	}
 	
 	/* Chooses the richest vegetation node nearby */
 	vegetation_cell choose_cell {
-        return (my_cell.neighbors2) with_max_of (each.food);
-    }
+		return one_of (my_cell.neighbors2);
+        // return (my_cell.neighbors2) with_max_of (each.food);
+	}
 	
 	/* Consumes vegetation inside current node */
 	float energy_from_eat {
