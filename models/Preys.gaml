@@ -17,7 +17,7 @@ species prey parent: generic_species {
 		is_infected <- flip(infection_probability);
 	}
 	
-	/* Chooses the richest vegetation node nearby */
+	/* Chooses random neighboring vegetation node */
 	vegetation_cell choose_cell {
 		return one_of (my_cell.neighbors2);
         // return (my_cell.neighbors2) with_max_of (each.food);

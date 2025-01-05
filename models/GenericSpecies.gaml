@@ -31,14 +31,10 @@ species generic_species {
 	bool is_infected <- false update: infection_update_rule();
 	
 	bool infection_update_rule {
-		if(is_infected){
-			return flip(1 - cured_proba);
-		}
+		if (is_infected) { return flip(1 - cured_proba); }
 		list<generic_species> nearby_species <- generic_species inside(my_cell);
-		if !empty(nearby_species) {
-			if one_of (nearby_species).is_infected {
-				return flip(infection_spread_probability);
-			}
+		if !empty(nearby_species) and one_of (nearby_species).is_infected {
+			return flip(infection_spread_probability);
 		}
 		return false;
 	}
