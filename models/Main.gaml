@@ -29,6 +29,8 @@ global {
     float predator_energy_reproduce <- 0.5;
 	
 	float infection_probability <- 0.1;
+	float infection_spread_probability <- 0.1;
+	float cured_proba <- 0.01;
 	int nb_infected_preys -> { length(prey where (each.is_infected)) };
 	int nb_infected_predators -> { length(predator where (each.is_infected)) };
 
@@ -36,5 +38,9 @@ global {
 		create prey number: nb_preys_init;
 		create predator number: nb_predators_init;
 	}
+	
+	reflex stop_simulation when: (nb_preys = 0) or (nb_predators = 0) {
+		do pause;
+	} 
 	
 }
