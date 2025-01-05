@@ -19,7 +19,7 @@ species generic_species {
 	
 	float energy_update_rule {
 		if (is_infected) {
-			return energy - energy_consum + 0.02; 
+			return energy - energy_consum + infection_energy_consum; 
 		} else {
 			return energy - energy_consum; 
 		}
