@@ -15,7 +15,15 @@ species generic_species {
 	float max_transfer;
 	float energy_transfer;
 	float energy_consum;
-	float energy <- rnd(max_energy) update: energy - energy_consum max: max_energy;
+	float energy <- rnd(max_energy) update: energy_update_rule() max: max_energy;
+	
+	float energy_update_rule {
+		if (is_infected) {
+			return energy - energy_consum * 2; // Adjusted for infected
+		} else {
+			return energy - energy_consum; // Default behavior
+		}
+	}
 	
 	/* Disease */
 	bool is_infected;
