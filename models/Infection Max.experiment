@@ -1,0 +1,34 @@
+experiment Optimization model:'Main.gaml' type: batch repeat: 5 keep_seed: true until: (cycle = 500) parallel: 10{
+	parameter "Initial Infection Probability" var: infection_probability min: 0.01 max: 0.5 step: 0.05;
+	parameter "Infection Spread Probability" var: infection_spread_probability min: 0.05 max: 1.0 step: 0.05;
+	parameter "Infection Energy Consumption" var: infection_energy_consum min: 0.02 max: 0.5 step: 0.01;
+	parameter "Cured Probability" var: cured_proba min: 0.01 max: 0.2 step: 0.03;
+	parameter "Batch Mode" var: is_batch <- true;
+	
+	
+	
+	method tabu maximize: (nb_infected_preys + nb_infected_predators)
+							- 10 * infection_probability 
+							+ 5 * (1.0 - infection_energy_consum) 
+							iter_max: 10 tabu_list_size: 3;
+
+	permanent {
+	    display "Charts" background: #white refresh: every(1 # cycle) {
+	    	chart "Infection Score Over Time" type: series  size: {0.5, 0.5} position: {0, 0}{
+		        data "Score" value:(nb_infected_preys + nb_infected_predators) 
+									- 10 * infection_probability                
+									+ 5 * (1.0 - infection_energy_consum)   ;
+		    }
+		    chart "Infection Dynamics" type: series  size: {0.5, 0.5} position: {0.5, 0}{
+		        data "Preys Infected" value: nb_infected_preys;
+		        data "Predators Infected" value: nb_infected_predators;
+		    }
+		    chart "Parameter Trends" type: series  size: {0.5, 0.5} position: {0, 0.5}{
+		        data "Infection Probability" value: infection_probability;
+		        data "Spread Probability" value: infection_spread_probability;
+		        data "Energy Consumption" value: infection_energy_consum;
+		        data "Cured Probability" value: cured_proba;
+		    }
+	    }
+	}
+}
