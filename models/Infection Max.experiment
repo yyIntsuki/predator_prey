@@ -5,12 +5,12 @@ experiment Optimization model: 'Main.gaml' type: batch repeat: 5 keep_seed: true
 	parameter "Cured Probability" var: cured_proba min: 0.001 max: 0.01 step: 0.001;
 	parameter "Batch Mode" var: is_batch <- true;
 	
-	method tabu maximize: (nb_infected_preys + nb_infected_predators) iter_max: 10 tabu_list_size: 3;
+	method hill_climbing maximize: ((1+nb_infected_preys) / (1+nb_preys)) * ((1+nb_infected_predators) / (1+nb_predators)) iter_max: 10;
 
 	permanent {
 	    display "Charts" background: #white refresh: every (1#cycle) {
 	    	chart "Infection Score Over Time" type: series size: {0.5, 0.5} position: {0, 0} {
-		        data "Score" value: (1 + nb_infected_preys / 1 + nb_preys) / (1 + nb_infected_predators / 1 + nb_predators);
+		        data "Score" value: ((1+nb_infected_preys) / (1+nb_preys)) / ((1+nb_infected_predators) / (1+nb_predators));
 		    }
 		    
 		    chart "Infection Dynamics" type: series size: {0.5, 0.5} position: {0.5, 0} {
