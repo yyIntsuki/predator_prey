@@ -42,23 +42,24 @@ experiment Simulation model: 'Main.gaml' type: gui {
 				data "Predators" value: nb_infected_predators color: #darkred;
 			}
 			*/
-			chart "Predator Infection Distribution" type: pie background: #lightgray size: {0.5, 0.25} position: {0.5, 0} {
+			chart "Predator Infection Distribution" type: pie size: {0.5, 0.25} position: {0.5, 0} {
 				data "Healthy Predators" value: nb_predators - nb_infected_predators color: #red;
 				data "Infected Predators" value: nb_infected_predators color: #darkred;
 			}
-			chart "Prey Infection Distribution" type: pie background: #lightgray size: {0.5, 0.25} position: {0.5, 0.25} {
+			
+			chart "Prey Infection Distribution" type: pie size: {0.5, 0.25} position: {0.5, 0.25} {
 				data "Healthy Preys" value: nb_preys - nb_infected_preys color: #blue;
 				data "Infected Preys" value: nb_infected_predators color: #darkblue;
 			}
 			
-			chart "Prey Energy Distribution" type: histogram background: #lightgray size: {0.5, 0.5} position: {0, 0.5} {
+			chart "Prey Energy Distribution" type: histogram size: {0.5, 0.5} position: {0, 0.5} {
 				data "]0;0.25]" value: prey count (each.energy <= 0.25) color: #blue;
 				data "]0.25;0.5]" value: prey count ((each.energy > 0.25) and (each.energy <= 0.5)) color: #blue;
 				data "]0.5;0.75]" value: prey count ((each.energy > 0.5) and (each.energy <= 0.75)) color: #blue;
 				data "]0.75;1]" value: prey count (each.energy > 0.75) color: #blue;
 			}
 			
-			chart "Predator Energy Distribution" type: histogram background: #lightgray size: {0.5, 0.5} position: {0.5, 0.5} {
+			chart "Predator Energy Distribution" type: histogram size: {0.5, 0.5} position: {0.5, 0.5} {
 				data "]0;0.25]" value: predator count (each.energy <= 0.25) color: #red;
 				data "]0.25;0.5]" value: predator count ((each.energy > 0.25) and (each.energy <= 0.5)) color: #red;
 				data "]0.5;0.75]" value: predator count ((each.energy > 0.5) and (each.energy <= 0.75)) color: #red;
