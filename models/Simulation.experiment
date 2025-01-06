@@ -20,7 +20,7 @@ experiment Simulation model: 'Main.gaml' type: gui {
 	
 	parameter "Infection Probability: " var: infection_probability min: 0.0 max: 1.0 category: "Disease Spread";
 	parameter "Infection Spread Probability: " var: infection_spread_probability min: 0.0 max: 1.0 category: "Disease Spread";
-	parameter "Infection Energy Consumtion: " var: infection_energy_consum min: 0.0 max: 1.0 category: "Disease Spread";
+	parameter "Infection Energy Consumtion: " var: infection_energy_consum min: 0.0 max: 0.05 category: "Disease Spread";
 	parameter "Cured Probability: " var: cured_proba min: 0.0 max: 0.01 category: "Disease Spread";
 	
 	output {
@@ -36,10 +36,19 @@ experiment Simulation model: 'Main.gaml' type: gui {
 				data "Preys" value: nb_preys color: #blue;
 				data "Predators" value: nb_predators color: #red;
 			}
-			
-			chart "Infection Distribution" type: pie background: #lightgray size: {0.5, 0.5} position: {0.5, 0} {
+			/*
+			chart "Infection Distribution" type: pie background: #lightgray size: {0.25, 0.5} position: {0.5, 0} {
 				data "Preys" value: nb_infected_preys color: #darkblue;
 				data "Predators" value: nb_infected_predators color: #darkred;
+			}
+			*/
+			chart "Predator Infection Distribution" type: pie background: #lightgray size: {0.5, 0.25} position: {0.5, 0} {
+				data "Healthy Predators" value: nb_predators color: #darkblue;
+				data "Infected Predators" value: nb_infected_predators color: #darkred;
+			}
+			chart "Prey Infection Distribution" type: pie background: #lightgray size: {0.5, 0.25} position: {0.5, 0.25} {
+				data "Healthy Preys" value: nb_preys color: #darkblue;
+				data "Infected Preys" value: nb_infected_predators color: #darkred;
 			}
 			
 			chart "Prey Energy Distribution" type: histogram background: #lightgray size: {0.5, 0.5} position: {0, 0.5} {
@@ -55,6 +64,7 @@ experiment Simulation model: 'Main.gaml' type: gui {
 				data "]0.5;0.75]" value: predator count ((each.energy > 0.5) and (each.energy <= 0.75)) color: #red;
 				data "]0.75;1]" value: predator count (each.energy > 0.75) color: #red;
 			}
+			
 		}
 		
 		monitor "Number of preys" value: nb_preys;
