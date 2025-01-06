@@ -33,6 +33,8 @@ species generic_species {
 	reflex infection{
 		list<generic_species> nearby_species <- list<generic_species> (self neighbors_at 4);
 		if not empty(nearby_species) and one_of (nearby_species).is_infected {
+			write "neighbors of " + self + ": ";
+			write nearby_species;
 			if (flip(infection_spread_probability)) { is_infected <- true; }
 		}
 	}
