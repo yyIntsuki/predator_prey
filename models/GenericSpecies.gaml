@@ -28,17 +28,19 @@ species generic_species {
 	float energy_reproduce;
 	
 	/* Disease */
-	bool is_infected <- false update: infection_update_rule();
-	
-	bool infection_update_rule {
-		if (is_infected) { return flip(1 - cured_proba); }
-		list<generic_species> nearby_species <- generic_species inside(my_cell);
-		if !empty(nearby_species) and one_of (nearby_species).is_infected {
-			return flip(infection_spread_probability);
+	bool is_infected <- false;
+
+	reflex infection{
+		list<generic_species> nearby_species <- list<generic_species> (self neighbors_at 4);
+		if not empty(nearby_species) and one_of (nearby_species).is_infected {
+			if (flip(infection_spread_probability)) { is_infected <- true; }
 		}
-		return false;
 	}
-	
+
+	reflex cure when: is_infected {
+		if (flip(cured_proba)) { is_infected <- false; }
+    }
+
 	/* Location */
 	vegetation_cell my_cell;
 	
@@ -64,9 +66,9 @@ species generic_species {
 	reflex reproduce when: (energy >= energy_reproduce) and (flip(proba_reproduce)) {
         int nb_offsprings <- rnd(1, nb_max_offsprings);
         create species(self) number: nb_offsprings {
-            my_cell <- myself.my_cell ;
-            location <- my_cell.location ;
-            energy <- myself.energy / nb_offsprings ;
+            my_cell <- myself.my_cell;
+            location <- my_cell.location;
+            energy <- myself.energy / nb_offsprings;
         }
         energy <- energy / nb_offsprings ;
     }

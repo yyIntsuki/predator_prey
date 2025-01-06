@@ -18,10 +18,7 @@ species prey parent: generic_species {
 	}
 	
 	/* Chooses random neighboring vegetation node */
-	vegetation_cell choose_cell {
-		return one_of (my_cell.neighbors2);
-        // return (my_cell.neighbors2) with_max_of (each.food);
-	}
+	vegetation_cell choose_cell { return one_of (my_cell.neighbors2); }
 	
 	/* Consumes vegetation inside current node */
 	float energy_from_eat {
@@ -33,8 +30,6 @@ species prey parent: generic_species {
 		return energy_transfer;
 	}
 	
-	reflex infected when: is_infected {
-		color <- #darkblue;
-	}
+	reflex infected when: is_infected { color <- #darkblue; }
 	
 }
