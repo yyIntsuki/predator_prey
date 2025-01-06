@@ -15,13 +15,13 @@ species generic_species {
 	float max_transfer;
 	float energy_transfer;
 	float energy_consum;
-	float energy <- rnd(max_energy) update: energy_update_rule() max: max_energy;
+	float energy <- rnd(max_energy) 
+					update: is_infected ? 
+					energy - (energy_consum + infection_energy_consum) :
+					energy - energy_consum  
+					max: max_energy;
 	
-	float energy_update_rule {
-		if (is_infected) { return energy - energy_consum + infection_energy_consum; } 
-		else { return energy - energy_consum; }
-	}
-	
+		
 	/* Reproduction */
 	float proba_reproduce;
 	int nb_max_offsprings;
@@ -29,20 +29,32 @@ species generic_species {
 	
 	/* Disease */
 	bool is_infected <- false;
-
-	reflex infection{
-		list<generic_species> nearby_species <- list<generic_species> (self neighbors_at 4);
-		if not empty(nearby_species) and one_of (nearby_species).is_infected {
-			write "neighbors of " + self + ": ";
-			write nearby_species;
-			if (flip(infection_spread_probability)) { is_infected <- true; }
-		}
+	
+	reflex infection {
+	    loop cell over: my_cell.neighbors2{
+	    	list<predator> pred <- predator inside (cell);
+	    	list<prey> pr <- prey inside (cell);
+	    	loop i over: pred {
+	    		if (i.is_infected and flip(infection_spread_probability)){
+	    			is_infected <- true;
+	    		}
+	    	}
+	    	loop i over: pr {
+	    		if (i.is_infected and flip(infection_spread_probability)){
+	    			is_infected <- true;
+	    		}
+	    	}
+	    	if (is_infected) {break;}
+        }
 	}
 
+	
 	reflex cure when: is_infected {
-		if (flip(cured_proba)) { is_infected <- false; }
-    }
-
+		if (flip(cured_proba)){
+			is_infected <- false;
+		}
+	}
+	
 	/* Location */
 	vegetation_cell my_cell;
 	

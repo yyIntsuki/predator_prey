@@ -21,7 +21,7 @@ experiment Simulation model: 'Main.gaml' type: gui {
 	parameter "Infection Probability: " var: infection_probability min: 0.0 max: 1.0 category: "Disease Spread";
 	parameter "Infection Spread Probability: " var: infection_spread_probability min: 0.0 max: 1.0 category: "Disease Spread";
 	parameter "Infection Energy Consumtion: " var: infection_energy_consum min: 0.0 max: 1.0 category: "Disease Spread";
-	parameter "Cured Probability: " var: cured_proba min: 0.0 max: 1.0 category: "Disease Spread";
+	parameter "Cured Probability: " var: cured_proba min: 0.0 max: 0.01 category: "Disease Spread";
 	
 	output {
 		
