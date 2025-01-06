@@ -30,6 +30,8 @@ species prey parent: generic_species {
 		return energy_transfer;
 	}
 	
+	reflex cured when: not is_infected { color <- #blue; }
+	
 	reflex infected when: is_infected { color <- #darkblue; }
 	
 }

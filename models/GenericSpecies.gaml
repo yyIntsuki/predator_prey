@@ -31,28 +31,25 @@ species generic_species {
 	bool is_infected <- false;
 	
 	reflex infection {
-	    loop cell over: my_cell.neighbors2{
-	    	list<predator> pred <- predator inside (cell);
-	    	list<prey> pr <- prey inside (cell);
+		loop cell over: my_cell.neighbors2 {
+			list<predator> pred <- predator inside (cell);
+			list<prey> pr <- prey inside (cell);
 	    	loop i over: pred {
-	    		if (i.is_infected and flip(infection_spread_probability)){
+	    		if (i.is_infected and flip(infection_spread_probability)) {
 	    			is_infected <- true;
 	    		}
 	    	}
 	    	loop i over: pr {
-	    		if (i.is_infected and flip(infection_spread_probability)){
+	    		if (i.is_infected and flip(infection_spread_probability)) {
 	    			is_infected <- true;
 	    		}
 	    	}
-	    	if (is_infected) {break;}
+	    	if (is_infected) { break; }
         }
 	}
 
-	
 	reflex cure when: is_infected {
-		if (flip(cured_proba)){
-			is_infected <- false;
-		}
+		if (flip(cured_proba)) { is_infected <- false; }
 	}
 	
 	/* Location */

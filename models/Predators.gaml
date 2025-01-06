@@ -17,13 +17,13 @@ species predator parent: generic_species {
 	}
 	
 	/* Chooses random neiboring nodes */
-    vegetation_cell choose_cell { return one_of (my_cell.neighbors2); }
+	vegetation_cell choose_cell { return one_of (my_cell.neighbors2); }
 	
 	/* Consumes a prey inside current node
 	 * Predator is infected if prey consumed was infected
 	 */
 	float energy_from_eat {
-		if (energy > max_energy * 0.7) { return 0.0; }	
+		if (energy > max_energy * 0.7) { return 0.0; }
 		list<prey> reachable_preys <- prey inside (my_cell);
 		if !empty(reachable_preys) {
 			if one_of (reachable_preys).is_infected and not is_infected { is_infected <- flip(infection_probability); }
@@ -32,6 +32,8 @@ species predator parent: generic_species {
 		}
 		return 0.0;
 	}
+	
+	reflex cured when: not is_infected { color <- #red; }
 	
 	reflex infected when: is_infected { color <- #darkred; }
 	

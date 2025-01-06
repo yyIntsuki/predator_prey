@@ -32,7 +32,7 @@ global {
 	
 	float infection_probability <- 0.1;
 	float infection_spread_probability <- 0.1;
-	float infection_energy_consum <- 0.005;
+	float infection_energy_consum <- 0.002;
 	float cured_proba <- 0.001;
 	int nb_infected_preys -> { length(prey where (each.is_infected)) };
 	int nb_infected_predators -> { length(predator where (each.is_infected)) };
